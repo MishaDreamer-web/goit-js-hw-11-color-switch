@@ -28,8 +28,10 @@ function onStartBtnClick() {
     document.body.style.backgroundColor =
       colors[randomIntegerFromInterval(0, colors.length - 1)];
   }, TIMEDELAY);
-  startBtn.disabled = true;
-  stopBtn.disabled = false;
+  if (colorInterval) {
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+  }
 }
 
 stopBtn.addEventListener('click', onStopBtnClick);
@@ -37,8 +39,11 @@ stopBtn.addEventListener('click', onStopBtnClick);
 function onStopBtnClick() {
   console.log('click on stop');
   clearInterval(colorInterval);
-  startBtn.disabled = false;
-  stopBtn.disabled = true;
+  colorInterval = null;
+  if (colorInterval === null) {
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  }
 }
 
 // document.body.style.backgroundColor = colors[2];
